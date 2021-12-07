@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Modal, Button } from 'react-bootstrap'
-import NewCoasterForm from '../../NewCoasterForm'
+import NewCoasterForm from './NewCoasterForm'
 import CoasterCard from './CoasterCard'
 
 class CoasterList extends Component {
@@ -26,7 +26,7 @@ class CoasterList extends Component {
 
   render() {
 
-
+    const { coasters, refreshCoasters } = this.props
 
     return (
       <div>
@@ -41,19 +41,16 @@ class CoasterList extends Component {
             <Modal.Title>Nueva Coaster</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <NewCoasterForm refreshCoasters={this.props.refreshCoasters} closeModal={this.closeModal} />
+            <NewCoasterForm refreshCoasters={refreshCoasters} closeModal={this.closeModal} />
           </Modal.Body>
-
         </Modal>
-        <Row>
-          {this.props.coasters.map(elm => {
 
-            return (
-              <Col key={elm._id}>
-                <CoasterCard  {...elm} />
-              </Col>
-            )
-          })
+        <Row>
+          {coasters.map(elm => (
+            <Col key={elm._id}>
+              <CoasterCard  {...elm} />
+            </Col>
+          ))
           }
         </Row>
       </div>

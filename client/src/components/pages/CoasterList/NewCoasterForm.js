@@ -1,26 +1,33 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import CoasterService from '../services/coaster.service'
+import Spinner from '../../shared/Spinner/Spinner'
+import CoasterService from '../../../services/coaster.service'
+import UploadService from '../../../services/upload.service'
 
 export default class NewCoasterForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      title: "",
-      description: "",
-      length: "",
-      inversions: "",
-      imageUrl: ""
+      coaster: {
+        title: "",
+        description: "",
+        length: "",
+        inversions: "",
+        imageUrl: ""
+      },
+
+      loading: false
     }
 
     this.service = new CoasterService()
+    this.uploadService = new UploadService()
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.service.createCoaster(this.state)
+    this.service.createCoaster(this.state.coaster)
       .then(response => {
         this.props.closeModal()
         this.props.refreshCoasters()
@@ -32,7 +39,35 @@ export default class NewCoasterForm extends Component {
   handleInputChange = (e) => {
     const { name, value } = e.currentTarget
 
-    this.setState({ [name]: value })
+    this.setState({
+      coaster: {
+        ...this.state.coaster,
+        [name]: value
+      }
+    })
+  }
+
+  handleUploadChange = (e) => {
+
+    this.setState({ loading: true })
+
+    const uploadData = new FormData()
+    uploadData.append('imageData', e.target.files[0])
+
+    this.uploadService
+      .uploadImage(uploadData)
+      .then(response => {
+
+        this.setState({
+          coaster: {
+            ...this.state.coaster,
+            imageUrl: response.data.cloudinary_url
+          },
+          loading: false
+        })
+      })
+      .catch(err => console.log(err))
+
   }
 
 
@@ -60,12 +95,13 @@ export default class NewCoasterForm extends Component {
           <Form.Control onChange={this.handleInputChange} value={this.state.inversions} name="inversions" type="text" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="imageUrl">
-          <Form.Label>Url de la imagen</Form.Label>
-          <Form.Control onChange={this.handleInputChange} value={this.state.imageUrl} name="imageUrl" type="text" />
+        <Form.Group className="mb-3" controlId="imageData">
+          <Form.Label>Archivo de imagen</Form.Label>
+          <Form.Control onChange={this.handleUploadChange} name="imageData" type="file" />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        {this.state.loading && <Spinner shape="circle" />}
+        <Button disabled={this.state.loading} variant="primary" type="submit">
           Submit
         </Button>
       </Form>
