@@ -30,7 +30,7 @@ class CoasterList extends Component {
 
     return (
       <div>
-        <Button onClick={this.openModal}>Crea una nueva montaña rusa</Button>
+        {this.props.loggedUser && <Button onClick={this.openModal}>Crea una nueva montaña rusa</Button>}
 
         <Modal
           show={this.state.showModal}

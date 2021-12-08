@@ -34,7 +34,7 @@ class CoasterPage extends Component {
       <Container>
         <h1>Coaster List</h1>
 
-        <CoasterList refreshCoasters={this.refreshCoasters} coasters={this.state.coasters} />
+        <CoasterList loggedUser={this.props.loggedUser} refreshCoasters={this.refreshCoasters} coasters={this.state.coasters} />
 
       </Container>
     )
