@@ -37,7 +37,7 @@ class CoasterDetails extends Component {
         <h1>Detalles</h1>
 
         <Row className="justify-content-around">
-          <Col md={6} style={{ overflow: "hidden" }}>
+          <Col md={4} style={{ overflow: "hidden" }}>
             <article>
               <h2>{title}</h2>
               <div>
@@ -49,7 +49,7 @@ class CoasterDetails extends Component {
               </div>
             </article>
           </Col>
-          <Col md={4}>
+          <Col md={6}>
             <img src={imageUrl} alt={title} ></img>
           </Col>
         </Row>

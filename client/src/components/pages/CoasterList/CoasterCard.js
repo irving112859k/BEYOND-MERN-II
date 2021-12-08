@@ -3,7 +3,10 @@ import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './CoastersPage.css'
 
-const CoasterCard = ({ _id, title, description, inversions, length, imageUrl }) => {
+const CoasterCard = ({ _id, title, description, owned, imageUrl }) => {
+
+  const editFunction = () => alert("Esto ya os lo currais vosotros")
+
   return (
     <Card className="coaster-card" style={{ width: '18rem' }}>
       <Card.Img variant="top" src={imageUrl} />
@@ -16,6 +19,7 @@ const CoasterCard = ({ _id, title, description, inversions, length, imageUrl }) 
         <Link to={`/coaster/${_id}`}>
           <Button variant="primary">Detalles</Button>
         </Link>
+        {owned && <Button onClick={editFunction} variant="secondary" className="ms-3">Editar</Button>}
       </Card.Body>
     </Card>
   )

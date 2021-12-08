@@ -7,6 +7,7 @@
   5. Creamos *función showText* en *App.js*.
   6. Pasamos la función a aquellos componentes que necesiten lanzar alertas.
   7. Creamos *función closeAlert* en *App.js*
+  
 ## Contenido propietario
 
   1. Añadimos owner al modelo necesario.

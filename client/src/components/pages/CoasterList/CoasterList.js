@@ -48,7 +48,7 @@ class CoasterList extends Component {
         <Row>
           {coasters.map(elm => (
             <Col key={elm._id}>
-              <CoasterCard  {...elm} />
+              <CoasterCard owned={this.props.loggedUser?._id === elm.owner} {...elm} />
             </Col>
           ))
           }

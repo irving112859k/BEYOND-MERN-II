@@ -20,7 +20,7 @@ class LoginPage extends Component {
     this.authService.login(this.state.username, this.state.pwd)
       .then(response => {
         this.props.storeUser(response.data)
-
+        this.props.showMessage("Login Success")
         this.props.history.push("/coaster-list")
 
       })

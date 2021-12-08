@@ -3,7 +3,8 @@ import axios from 'axios'
 class CoasterService {
   constructor() {
     this.app = axios.create({
-      baseURL: 'http://localhost:5000/api/coasters'
+      baseURL: 'http://localhost:5000/api/coasters',
+      withCredentials: true
     })
   }
 

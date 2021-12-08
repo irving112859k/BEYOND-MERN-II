@@ -20,7 +20,9 @@ router.get("/coaster/:id", (req, res) => {
 router.post("/newCoaster", (req, res) => {
   const { title, description, inversions, length, imageUrl } = req.body
 
-  Coaster.create({ title, description, inversions, length, imageUrl })
+  console.log(req.session, "<===============0")
+
+  Coaster.create({ title, description, inversions, length, imageUrl, owner: req.session.currentUser._id })
     .then(newCoaster => res.json(newCoaster))
     .catch(err => res.json({ err, errMessage: "Problema creando Coaster" }))
 })

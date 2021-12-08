@@ -6,7 +6,8 @@ const coasterSchema = new Schema(
     description: String,
     inversions: Number,
     length: Number,
-    imageUrl: String
+    imageUrl: String,
+    owner: { type: Schema.Types.ObjectId, ref: "User" }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
