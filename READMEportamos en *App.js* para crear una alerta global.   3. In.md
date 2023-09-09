@@ -1,6 +1,6 @@
 ## Alertas periféricas
 
-  1. Creamos *Alert.js* en la carpeta de recursos compartidos.
+  1. Creamos  en la carpeta de recursos compartidos.
   2. Importamos en *App.js* para crear una alerta global.
   3. Incluimos en el *State* los valores necesarios para el alert. (*show* y *text*)
   4. Pasamos esos valores al Alert para comprobar si funciona.
